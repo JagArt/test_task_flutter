@@ -27,6 +27,8 @@ import 'package:test_task_flutter/domain/use_case/interface/fetch_posts_use_case
     as _i246;
 import 'package:test_task_flutter/domain/use_case/interface/get_post_use_case.dart'
     as _i879;
+import 'package:test_task_flutter/presentation/home_screen/%20bloc/home_bloc.dart'
+    as _i684;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -49,6 +51,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i879.GetPostUseCase>(
       () => _i938.FetchPostsUseCaseImpl(gh<_i248.RemoteRepository>()),
+    );
+    gh.factory<_i684.HomeBloc>(
+      () => _i684.HomeBloc(gh<_i246.FetchPostsUseCase>()),
     );
     return this;
   }
