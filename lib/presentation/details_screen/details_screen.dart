@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_task_flutter/common/di/injector.dart';
 import 'package:test_task_flutter/presentation/details_screen/bloc/details_bloc.dart';
+import 'package:test_task_flutter/presentation/details_screen/widget/explicit_animation_widget.dart';
+import 'package:test_task_flutter/presentation/details_screen/widget/implicit_animation_widget.dart';
 import 'package:test_task_flutter/presentation/ui_component/snackbar/snackbar_helper.dart';
 
 @RoutePage()
@@ -51,24 +53,30 @@ class _DetailsPageState extends State<_DetailsPage> {
               child:
                   state.status.isLoading
                       ? CircularProgressIndicator()
-                      : Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              post?.title ?? '',
-                              style: TextStyle(
-                                fontSize: 30, //
+                      : SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                post?.title ?? '',
+                                style: TextStyle(
+                                  fontSize: 30, //
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 24),
-                            Text(
-                              post?.body ?? '',
-                              style: TextStyle(
-                                fontSize: 20, //
+                              SizedBox(height: 24),
+                              Text(
+                                post?.body ?? '',
+                                style: TextStyle(
+                                  fontSize: 20, //
+                                ),
                               ),
-                            ), //
-                          ],
+                              SizedBox(height: 24),
+                              ImplicitAnimationWidget(),
+                              SizedBox(height: 24),
+                              ExplicitAnimationWidget(),
+                            ],
+                          ),
                         ),
                       ),
             ),

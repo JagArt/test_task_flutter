@@ -67,7 +67,7 @@ class _HomePageState extends State<_HomePage> {
               child: Center(
                 child: Stack(
                   children: [
-                    state.posts.isEmpty
+                    state.posts.isEmpty && !state.status.isLoading
                         ? Text('Постов нету')
                         : RefreshIndicator(
                           onRefresh: () async {
