@@ -30,7 +30,9 @@ import 'package:test_task_flutter/domain/use_case/interface/get_post_use_case.da
 import 'package:test_task_flutter/presentation/details_screen/bloc/details_bloc.dart'
     as _i777;
 import 'package:test_task_flutter/presentation/home_screen/bloc/home_bloc.dart'
-    as _i684;
+    as _i169;
+import 'package:test_task_flutter/presentation/ui_component/theme/bloc/theme_bloc.dart'
+    as _i601;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -40,6 +42,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioProvider = _$DioProvider();
+    gh.factory<_i601.ThemeBloc>(() => _i601.ThemeBloc());
     gh.factory<_i581.BaseConfig>(() => _i865.MainConfig());
     gh.singleton<_i361.Dio>(() => dioProvider.dio(gh<_i581.BaseConfig>()));
     gh.lazySingleton<_i248.RemoteRepository>(
@@ -54,8 +57,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i879.GetPostUseCase>(
       () => _i938.FetchPostsUseCaseImpl(gh<_i248.RemoteRepository>()),
     );
-    gh.factory<_i684.HomeBloc>(
-      () => _i684.HomeBloc(gh<_i246.FetchPostsUseCase>()),
+    gh.factory<_i169.HomeBloc>(
+      () => _i169.HomeBloc(gh<_i246.FetchPostsUseCase>()),
     );
     gh.factory<_i777.DetailsBloc>(
       () => _i777.DetailsBloc(gh<_i879.GetPostUseCase>()),

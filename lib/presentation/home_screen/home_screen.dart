@@ -5,6 +5,7 @@ import 'package:test_task_flutter/common/di/injector.dart';
 import 'package:test_task_flutter/common/navigation/app_router.gr.dart';
 import 'package:test_task_flutter/presentation/home_screen/bloc/home_bloc.dart';
 import 'package:test_task_flutter/presentation/home_screen/widget/post_card.dart';
+import 'package:test_task_flutter/presentation/ui_component/theme/bloc/theme_bloc.dart';
 
 import '../ui_component/snackbar/snackbar_helper.dart';
 
@@ -46,7 +47,21 @@ class _HomePageState extends State<_HomePage> {
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(title: Text('Test Task Flutter')),
+            appBar: AppBar(
+              title: Text('Test Task Flutter'),
+              actions: [
+                BlocBuilder<ThemeBloc, ThemeState>(
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                        context.read<ThemeBloc>().add(ThemeChangeEvent());
+                      },
+                      icon: Icon(state.isLight ? Icons.dark_mode : Icons.light_mode),
+                    );
+                  },
+                ),
+              ],
+            ),
             body: SafeArea(
               child: Center(
                 child:
