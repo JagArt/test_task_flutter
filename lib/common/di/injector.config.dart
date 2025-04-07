@@ -26,22 +26,22 @@ import 'package:test_task_flutter/domain/repository/local_repository.dart'
     as _i43;
 import 'package:test_task_flutter/domain/repository/remote_repository.dart'
     as _i248;
-import 'package:test_task_flutter/domain/use_case/implementation/fetch_posts_use_case_impl.dart'
-    as _i318;
-import 'package:test_task_flutter/domain/use_case/implementation/get_post_use_case_impl.dart'
-    as _i938;
 import 'package:test_task_flutter/domain/use_case/implementation/local/get_app_theme_local_storage_use_case_impl.dart'
     as _i959;
 import 'package:test_task_flutter/domain/use_case/implementation/local/set_app_theme_local_storage_use_case_impl.dart'
     as _i289;
-import 'package:test_task_flutter/domain/use_case/interface/fetch_posts_use_case.dart'
-    as _i246;
-import 'package:test_task_flutter/domain/use_case/interface/get_post_use_case.dart'
-    as _i879;
-import 'package:test_task_flutter/domain/use_case/interface/local/get_app_theme_local_storage_use_case_interface.dart'
-    as _i996;
-import 'package:test_task_flutter/domain/use_case/interface/local/set_app_theme_local_storage_use_case_interface.dart'
-    as _i709;
+import 'package:test_task_flutter/domain/use_case/implementation/posts/fetch_posts_use_case_impl.dart'
+    as _i332;
+import 'package:test_task_flutter/domain/use_case/implementation/posts/get_post_use_case_impl.dart'
+    as _i639;
+import 'package:test_task_flutter/domain/use_case/interface/local/theme/get_app_theme_local_storage_use_case.dart'
+    as _i1027;
+import 'package:test_task_flutter/domain/use_case/interface/local/theme/set_app_theme_local_storage_use_case.dart'
+    as _i416;
+import 'package:test_task_flutter/domain/use_case/interface/posts/fetch_posts_use_case.dart'
+    as _i780;
+import 'package:test_task_flutter/domain/use_case/interface/posts/get_post_use_case.dart'
+    as _i430;
 import 'package:test_task_flutter/presentation/details_screen/bloc/details_bloc.dart'
     as _i777;
 import 'package:test_task_flutter/presentation/home_screen/bloc/home_bloc.dart'
@@ -69,13 +69,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i43.LocalRepository>(
       () => _i125.LocalRepositoryImpl(gh<_i460.SharedPreferencesAsync>()),
     );
-    gh.factory<_i709.SetAppThemeLocalStorageUseCaseInterface>(
+    gh.factory<_i416.SetAppThemeLocalStorageUseCase>(
       () =>
           _i289.GetAppThemeLocalStorageUseCaseImpl(gh<_i43.LocalRepository>()),
     );
-    gh.factory<_i996.GetAppThemeLocalStorageUseCaseInterface>(
+    gh.factory<_i1027.GetAppThemeLocalStorageUseCase>(
       () =>
           _i959.GetAppThemeLocalStorageUseCaseImpl(gh<_i43.LocalRepository>()),
+    );
+    gh.factory<_i601.ThemeBloc>(
+      () => _i601.ThemeBloc(
+        gh<_i1027.GetAppThemeLocalStorageUseCase>(),
+        gh<_i416.SetAppThemeLocalStorageUseCase>(),
+      ),
     );
     gh.lazySingleton<_i248.RemoteRepository>(
       () => _i694.RemoteRepositoryImpl(
@@ -83,23 +89,23 @@ extension GetItInjectableX on _i174.GetIt {
         config: gh<_i581.BaseConfig>(),
       ),
     );
-    gh.factory<_i246.FetchPostsUseCase>(
-      () => _i318.FetchPostsUseCaseImpl(gh<_i248.RemoteRepository>()),
-    );
-    gh.factory<_i601.ThemeBloc>(
-      () => _i601.ThemeBloc(
-        gh<_i996.GetAppThemeLocalStorageUseCaseInterface>(),
-        gh<_i709.SetAppThemeLocalStorageUseCaseInterface>(),
+    gh.factory<_i430.GetPostUseCase>(
+      () => _i639.FetchPostsUseCaseImpl(
+        gh<_i43.LocalRepository>(),
+        gh<_i248.RemoteRepository>(),
       ),
     );
-    gh.factory<_i879.GetPostUseCase>(
-      () => _i938.FetchPostsUseCaseImpl(gh<_i248.RemoteRepository>()),
+    gh.factory<_i777.DetailsBloc>(
+      () => _i777.DetailsBloc(gh<_i430.GetPostUseCase>()),
+    );
+    gh.factory<_i780.FetchPostsUseCase>(
+      () => _i332.FetchPostsUseCaseImpl(
+        gh<_i43.LocalRepository>(),
+        gh<_i248.RemoteRepository>(),
+      ),
     );
     gh.factory<_i169.HomeBloc>(
-      () => _i169.HomeBloc(gh<_i246.FetchPostsUseCase>()),
-    );
-    gh.factory<_i777.DetailsBloc>(
-      () => _i777.DetailsBloc(gh<_i879.GetPostUseCase>()),
+      () => _i169.HomeBloc(gh<_i780.FetchPostsUseCase>()),
     );
     return this;
   }

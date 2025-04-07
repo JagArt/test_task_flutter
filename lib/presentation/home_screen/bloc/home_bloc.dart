@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:test_task_flutter/domain/entity/post.dart';
-import 'package:test_task_flutter/domain/use_case/interface/fetch_posts_use_case.dart';
+import 'package:test_task_flutter/domain/use_case/interface/posts/fetch_posts_use_case.dart';
 import 'package:test_task_flutter/presentation/base/bloc/base_bloc_impl.dart';
 
 part 'home_event.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-abstract class GetAppThemeLocalStorageUseCaseInterface {
+abstract class GetAppThemeLocalStorageUseCase {
   Future<ThemeMode> call();
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:test_task_flutter/domain/use_case/interface/local/get_app_theme_local_storage_use_case_interface.dart';
-import 'package:test_task_flutter/domain/use_case/interface/local/set_app_theme_local_storage_use_case_interface.dart';
+import 'package:test_task_flutter/domain/use_case/interface/local/theme/get_app_theme_local_storage_use_case.dart';
+import 'package:test_task_flutter/domain/use_case/interface/local/theme/set_app_theme_local_storage_use_case.dart';
 import 'package:test_task_flutter/presentation/base/bloc/base_bloc_impl.dart';
 
 part 'theme_event.dart';
@@ -15,8 +15,8 @@ final class ThemeBloc extends BaseBlocImpl<ThemeEvent, ThemeState> {
     add(ThemeInitialEvent());
   }
 
-  final GetAppThemeLocalStorageUseCaseInterface _getAppThemeLocalStorageUseCase;
-  final SetAppThemeLocalStorageUseCaseInterface _setAppThemeLocalStorageUseCaseInterface;
+  final GetAppThemeLocalStorageUseCase _getAppThemeLocalStorageUseCase;
+  final SetAppThemeLocalStorageUseCase _setAppThemeLocalStorageUseCaseInterface;
 
   @override
   handleEvent(ThemeEvent event, Emitter<ThemeState> emit) async {
