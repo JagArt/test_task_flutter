@@ -27,7 +27,9 @@ import 'package:test_task_flutter/domain/use_case/interface/fetch_posts_use_case
     as _i246;
 import 'package:test_task_flutter/domain/use_case/interface/get_post_use_case.dart'
     as _i879;
-import 'package:test_task_flutter/presentation/home_screen/%20bloc/home_bloc.dart'
+import 'package:test_task_flutter/presentation/details_screen/bloc/details_bloc.dart'
+    as _i777;
+import 'package:test_task_flutter/presentation/home_screen/bloc/home_bloc.dart'
     as _i684;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -54,6 +56,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i684.HomeBloc>(
       () => _i684.HomeBloc(gh<_i246.FetchPostsUseCase>()),
+    );
+    gh.factory<_i777.DetailsBloc>(
+      () => _i777.DetailsBloc(gh<_i879.GetPostUseCase>()),
     );
     return this;
   }

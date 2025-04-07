@@ -2,7 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_task_flutter/common/di/injector.dart';
-import 'package:test_task_flutter/presentation/home_screen/%20bloc/home_bloc.dart';
+import 'package:test_task_flutter/common/navigation/app_router.gr.dart';
+import 'package:test_task_flutter/presentation/home_screen/bloc/home_bloc.dart';
 import 'package:test_task_flutter/presentation/home_screen/widget/post_card.dart';
 
 import '../ui_component/snackbar/snackbar_helper.dart';
@@ -79,7 +80,7 @@ class _HomePageState extends State<_HomePage> {
   void _handleNavigation(HomeNavigation doNavigation) {
     switch (doNavigation) {
       case HomePostDetailsNavigation():
-        break;
+        context.router.push(DetailsRoute(id: doNavigation.id));
     }
   }
 
