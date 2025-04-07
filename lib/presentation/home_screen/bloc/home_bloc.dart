@@ -25,6 +25,7 @@ class HomeBloc extends BaseBlocImpl<HomeEvent, HomeState> {
   }
 
   Future<void> _handleHomeInitEvent(HomeInitEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(status: BaseBlocStatus.loading));
     final result = await _fetchPostsUseCase.call();
     if (result.isSuccess()) {
       emit(state.copyWith(posts: result.data, status: BaseBlocStatus.success));

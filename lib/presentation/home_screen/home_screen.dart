@@ -5,6 +5,7 @@ import 'package:test_task_flutter/common/di/injector.dart';
 import 'package:test_task_flutter/common/navigation/app_router.gr.dart';
 import 'package:test_task_flutter/presentation/home_screen/bloc/home_bloc.dart';
 import 'package:test_task_flutter/presentation/home_screen/widget/post_card.dart';
+import 'package:test_task_flutter/presentation/ui_component/custom_loading_placeholder.dart';
 import 'package:test_task_flutter/presentation/ui_component/theme/bloc/theme_bloc.dart';
 
 import '../ui_component/snackbar/snackbar_helper.dart';
@@ -64,26 +65,33 @@ class _HomePageState extends State<_HomePage> {
             ),
             body: SafeArea(
               child: Center(
-                child:
-                    state.status.isLoading
-                        ? CircularProgressIndicator()
-                        : state.posts.isEmpty
+                child: Stack(
+                  children: [
+                    state.posts.isEmpty
                         ? Text('Постов нету')
-                        : ListView.separated(
-                          itemCount: state.posts.length,
-                          padding: EdgeInsets.all(8),
-                          itemBuilder: (context, index) {
-                            final post = state.posts[index];
-                            return PostCard(
-                              post: post,
-                              onTap:
-                                  () => context.read<HomeBloc>().add(
-                                    HomeOpenDetailsEvent(id: post.id),
-                                  ),
-                            );
+                        : RefreshIndicator(
+                          onRefresh: () async {
+                            context.read<HomeBloc>().add(HomeInitEvent());
                           },
-                          separatorBuilder: (context, index) => SizedBox(height: 8),
+                          child: ListView.separated(
+                            itemCount: state.posts.length,
+                            padding: EdgeInsets.all(8),
+                            itemBuilder: (context, index) {
+                              final post = state.posts[index];
+                              return PostCard(
+                                post: post,
+                                onTap:
+                                    () => context.read<HomeBloc>().add(
+                                      HomeOpenDetailsEvent(id: post.id),
+                                    ),
+                              );
+                            },
+                            separatorBuilder: (context, index) => SizedBox(height: 8),
+                          ),
                         ),
+                    if (state.status.isLoading) CustomLoadingPlaceholder(),
+                  ],
+                ),
               ),
             ),
           );
