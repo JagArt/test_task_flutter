@@ -1,16 +1,30 @@
 # test_task_flutter
 
-A new Flutter project.
+Flutter Test App
 
-## Getting Started
+Main
+- Clean Architecture
+- Getting a list of posts
+- Getting post details
+- Dark light theme
+- Pull to refresh
+- Cache
 
-This project is a starting point for a Flutter application.
+DI: 
+- [get_it](https://pub.dev/packages/get_it)
+- [injectable](https://pub.dev/packages/injectable)
 
-A few resources to get you started if this is your first Flutter project:
+Routing: 
+- [auto_route](https://pub.dev/packages/auto_route)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Network: 
+- [Dio](https://pub.dev/packages/dio) 
+- [Retrofit](https://pub.dev/packages/retrofit)
+- [Logger](https://pub.dev/packages/logger)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+State management: 
+- [Bloc](https://pub.dev/packages/flutter_bloc)
+
+Local storage: 
+- [Shared preference](https://pub.dev/packages/shared_preferences)
+
